@@ -1,0 +1,14 @@
+language: python
+
+python:
+    - "3.7"
+env:
+    - SECRET_KEY='9#pvz0t&bs99u9s+sz%zusl5idq=n&hob0-76-py=)cy3#40c='
+services:
+    - postgresql
+install:
+    - pipenv install
+script:
+    -  pytest core/tests.py
+after_success:
+    - codecov
