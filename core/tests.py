@@ -25,6 +25,13 @@ class BoardModelTest(TestCase):
         board_twelve = Board.objects.get(board_size=8)
         self.assertEqual(board_twelve.get_size(), 'The board size is 8')
 
+    def create_board(self, board_size=9):
+        return Board.objects.create(board_size=board_size)
+
+    def test_course_creation(self):
+        board_size = self.create_board()
+        self.assertTrue(isinstance(board_size, Board))
+        self.assertEqual(board_size.__str__(), board_size.board_size)
 
 # API tests
 class BoardsApiTest(APITestCase):
