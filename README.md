@@ -108,3 +108,10 @@ Before running please follow this steps:
 ```
 - 8- Open your browser at **127.0.0.1:8000**
 - 9- Follow the 'Use Instructions' section described before:
+
+### Local unit tests
+  1- To run unit tests locally open your code editor's terminal type the nex command:
+```
+                            pytest core/tests.py
+```  
+          
