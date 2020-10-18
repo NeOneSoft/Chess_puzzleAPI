@@ -33,6 +33,7 @@ class BoardModelTest(TestCase):
         self.assertTrue(isinstance(board_size, Board))
         self.assertEqual(board_size.__str__(), board_size.board_size)
 
+
 # API tests
 class BoardsApiTest(APITestCase):
     """ Test API"""

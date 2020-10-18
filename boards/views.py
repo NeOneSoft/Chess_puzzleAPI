@@ -21,32 +21,33 @@ class BoardViewSet(viewsets.ModelViewSet):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.solutions = 0
+        self.results = []
 
     # Put queens over chess board using recursive function
     def put_queen(self, positions, target_row):
         """
         1.- Check if we can put a queen over N according to the possible cases
-        2.- If we found a valid place try to the the same for the next row using
+        2.- If we found a valid place try to the same for the next row using
         our recursive function
         3.- Repeat the action until complete our N*N chessboard
         """
-        # In case we reach our chess board, count the solutions, if the number of target_row == N row size
-        # And print our chess board
+        # In case we reach our chess board size, give the number solutions. If the number of target_row == N row size,
+        # print our chess board
         board_size = self.get_object()
         size = board_size.board_size
         if target_row == size:
             self.solutions += 1
-            self.show_full_board(positions)  # This line print the positions for each solution on console
+            self.results += [[i for i in positions]]
         else:
             # Traverse over N columns positions try to place a queen
             for column in range(size):
                 # Define invalid positions
-                if self.check_place(positions, target_row, column):
+                if self.verify_position(positions, target_row, column):
                     positions[target_row] = column
                     self.put_queen(positions, target_row + 1)
 
     # Check function to verify queen's position
-    def check_place(self, positions, ocuppied_rows, column):
+    def verify_position(self, positions, ocuppied_rows, column):
         """
         This function check the position according to previous placed queens, using column and diagonal constraits
         """
@@ -59,7 +60,7 @@ class BoardViewSet(viewsets.ModelViewSet):
         return True
 
     # Print our chess board
-    def show_full_board(self, positions):
+    def show_full_positions(self, positions):
         print(positions)
 
     # Find the number of solutions for N*N size chess board
@@ -69,4 +70,6 @@ class BoardViewSet(viewsets.ModelViewSet):
         size = board_size.board_size
         positions = [-1] * size
         self.put_queen(positions, 0)
-        return Response({"Number of found solutions": self.solutions})
+        return Response({"Number of found solutions": self.solutions},
+                        {"The positions of each solution are": self.results}
+                        )
