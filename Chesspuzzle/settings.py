@@ -72,6 +72,7 @@ WSGI_APPLICATION = 'Chesspuzzle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 # POSTGRES DockerConfiguration
 DATABASES = {
     'default': {
@@ -82,6 +83,28 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+"""
+# SQLite3 Local configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# Postgres Local configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'YOUR DB NAME',
+        'USER': 'YOUR USER',
+        'PASSWORD': 'YOUR PASSWORD',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

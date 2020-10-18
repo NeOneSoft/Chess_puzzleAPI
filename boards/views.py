@@ -51,14 +51,14 @@ class BoardViewSet(viewsets.ModelViewSet):
         This function check the position according to previous placed queens, using column and diagonal constraits
         """
         for i in range(ocuppied_rows):
-            # Check colum positions and diagonal positions
+            # Check column positions and diagonal positions
             if positions[i] == column or \
                     positions[i] - i == column - ocuppied_rows or \
                     positions[i] + i == column + ocuppied_rows:
                 return False
         return True
 
-    # Print our chess board
+    # Print our positions for each solution
     def show_full_positions(self, positions):
         print(positions)
 
