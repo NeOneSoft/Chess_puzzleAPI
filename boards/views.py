@@ -21,7 +21,6 @@ class BoardViewSet(viewsets.ModelViewSet):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.solutions = 0
-        self.results = []
 
     # Put queens over chess board using recursive function
     def put_queen(self, positions, target_row):
@@ -37,7 +36,7 @@ class BoardViewSet(viewsets.ModelViewSet):
         size = board_size.board_size
         if target_row == size:
             self.solutions += 1
-            self.results += [[i for i in positions]]
+            self.show_full_positions(positions)  # This line print the positions for each solution on console
         else:
             # Traverse over N columns positions try to place a queen
             for column in range(size):
@@ -70,6 +69,4 @@ class BoardViewSet(viewsets.ModelViewSet):
         size = board_size.board_size
         positions = [-1] * size
         self.put_queen(positions, 0)
-        return Response({"Number of found solutions": self.solutions},
-                        {"The positions of each solution are": self.results}
-                        )
+        return Response({"Number of found solutions": self.solutions})
